@@ -14,3 +14,4 @@ module.exports = (sequelize) => {
         },
     });
 };
+// falta el FK de motorcyle que lo hacemos con la relacion
