@@ -30,18 +30,18 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Motorcycle } = sequelize.models;
+const { Motorcycle, Stock } = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+/* -------------------------------------------------------------- */
+/* Relaciones                                                     */
+/* -------------------------------------------------------------- */
 
 // Stock - Motorcycle
-Motorcycle.hasMany(sequelize.models.Stock, {
+Motorcycle.hasMany(Stock, {
   foreignKey: 'motorcycleId',
-  // as: 'stocks',
 });
 
-Stock.belongsTo(sequelize.models.Motorcycle, {
+Stock.belongsTo(Motorcycle, {
   foreignKey: {
     name: 'motorcycleId',
     allowNull: false,

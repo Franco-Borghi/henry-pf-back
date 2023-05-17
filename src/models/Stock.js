@@ -1,9 +1,9 @@
-const { DataTypes, UUID } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    // defino el modelo
+ 
     sequelize.define('stock', {
-        motorcycle_id: {
+        chassis_id: {
             type: DataTypes.UUID,
             primaryKey: true,
             allowNull: false,
@@ -12,6 +12,5 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
-    });
+    },{timestamps: false});
 };
-// falta el FK de motorcyle que lo hacemos con la relacion
