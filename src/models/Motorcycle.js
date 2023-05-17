@@ -1,4 +1,4 @@
-const { DataTypes, UUID, UUIDV4 } = require('sequelize');
+const { DataTypes, UUIDV4 } = require('sequelize');
 // Exportamos una funcion que define el modelo
 module.exports = (sequelize) => {
   // defino el modelo
