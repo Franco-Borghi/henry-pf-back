@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
  
     sequelize.define('stock', {
         chassis_id: {
-            type: DataTypes.UUID,
+            type: DataTypes.STRING,
             primaryKey: true,
             allowNull: false,
         },
