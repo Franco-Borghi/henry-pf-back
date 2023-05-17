@@ -38,12 +38,15 @@ const { Motorcycle, Stock } = sequelize.models;
 
 // Stock - Motorcycle
 Motorcycle.hasMany(Stock, {
-  foreignKey: 'motorcycleId',
-});
+  foreignKey: {
+    name: 'motorcycle_id',
+    allowNull: false,
+    },
+    });
 
 Stock.belongsTo(Motorcycle, {
   foreignKey: {
-    name: 'motorcycleId',
+    name: 'motorcycle_id',
     allowNull: false,
   },
   onDelete: 'CASCADE',
