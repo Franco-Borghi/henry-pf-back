@@ -33,8 +33,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Motorcycle, Stock } = sequelize.models;
 
 /* -------------------------------------------------------------- */
-/* Relaciones                                                     */
+/* Relations                                                      */
 /* -------------------------------------------------------------- */
+
+
+//TODO: revisar si es necesario poner foreignKey en ambos o donde seria mejor ponerlo
 
 // Stock - Motorcycle
 Motorcycle.hasMany(Stock, {
@@ -49,8 +52,9 @@ Stock.belongsTo(Motorcycle, {
     name: 'motorcycle_id',
     allowNull: false,
   },
-  onDelete: 'CASCADE',
 });
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -43,14 +43,14 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     category: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    current: {
+    active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
