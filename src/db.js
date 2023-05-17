@@ -35,6 +35,20 @@ const { Motorcycle } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
+// Stock - Motorcycle
+Motorcycle.hasMany(sequelize.models.Stock, {
+  foreignKey: 'motorcycleId',
+  // as: 'stocks',
+});
+
+Stock.belongsTo(sequelize.models.Motorcycle, {
+  foreignKey: {
+    name: 'motorcycleId',
+    allowNull: false,
+  },
+  onDelete: 'CASCADE',
+});
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
