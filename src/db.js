@@ -30,7 +30,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Motorcycle, Stock, Reviews, Orders } = sequelize.models;
+const { Motorcycle, Stock, Reviews, Orders, Users } = sequelize.models;
 
 /* -------------------------------------------------------------- */
 /* Relations                                                      */
@@ -53,30 +53,30 @@ Stock.belongsTo(Motorcycle, {
   },
 });
 
-// Client - Reviews - Motorcycle
+// Users - Reviews - Motorcycle
 
 // Comentado hasta que tengamos el modelo de Clients
 
-// Client.belongsToMany(Motorcycle, { through: Reviews });
-// Motorcycle.belongsToMany(Client, { through: Reviews });
+Users.belongsToMany(Motorcycle, { through: Reviews });
+Motorcycle.belongsToMany(Users, { through: Reviews });
 
 // Additional associations to enable different queries
-// Review.belongsTo(Client);
-// Client.hasMany(Review);
-// Review.belongsTo(Motorcycle);
-// Motorcycle.hasMany(Review);
+Reviews.belongsTo(Users);
+Users.hasMany(Reviews);
+Reviews.belongsTo(Motorcycle);
+Motorcycle.hasMany(Reviews);
 
 
 ////////////////////////////////////////////////////
 // Relationship between Orders and Clients models //
 ////////////////////////////////////////////////////
 
-// Clients.hasMany(Orders, { 
-//   foreignKey: 'client_id'
+// Users.hasMany(Orders, { 
+//   foreignKey: 'user_id'
 // });
 
-// Orders.belongsTo(Clients, { 
-//   foreignKey: 'client_id'
+// Orders.belongsTo(Users, { 
+//   foreignKey: 'user_id'
 // });
 
 
