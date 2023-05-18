@@ -2,14 +2,15 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
  
-    sequelize.define('stock', {
+    sequelize.define('item', {
         chassisId: {
             type: DataTypes.STRING,
             primaryKey: true,
             allowNull: false,
         },
-        inStock: {
+        sold: {
             type: DataTypes.BOOLEAN,
+            defaultValue: false,
             allowNull: false,
         },
     },{timestamps: false});
