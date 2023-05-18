@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
+    
     sequelize.define("users",{
         id:{
             type: DataTypes.UUID,
@@ -34,7 +35,7 @@ module.exports = (sequelize) => {
             unique: true,
         },
         phone_number:{
-            type: DataTypes.INTIGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         password:{
