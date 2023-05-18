@@ -67,6 +67,17 @@ Stock.belongsTo(Motorcycle, {
 // Motorcycle.hasMany(Review);
 
 
+////////////////////////////////////////////////////
+// Relationship between Orders and Clients models //
+////////////////////////////////////////////////////
+
+// Clients.hasMany(Orders, { 
+//   foreignKey: 'client_id'
+// });
+
+// Orders.belongsTo(Clients, { 
+//   foreignKey: 'client_id'
+// });
 
 
 module.exports = {
