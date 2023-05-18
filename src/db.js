@@ -36,7 +36,6 @@ const { Motorcycle, Stock, Reviews, Orders } = sequelize.models;
 /* Relations                                                      */
 /* -------------------------------------------------------------- */
 
-
 //TODO: revisar si es necesario poner foreignKey en ambos o donde seria mejor ponerlo
 
 // Stock - Motorcycle
@@ -53,6 +52,20 @@ Stock.belongsTo(Motorcycle, {
     allowNull: false,
   },
 });
+
+// Client - Reviews - Motorcycle
+
+// Comentado hasta que tengamos el modelo de Clients
+
+// Client.belongsToMany(Motorcycle, { through: Reviews });
+// Motorcycle.belongsToMany(Client, { through: Reviews });
+
+// Additional associations to enable different queries
+// Review.belongsTo(Client);
+// Client.hasMany(Review);
+// Review.belongsTo(Motorcycle);
+// Motorcycle.hasMany(Review);
+
 
 
 
