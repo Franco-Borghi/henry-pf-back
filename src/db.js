@@ -41,14 +41,12 @@ const { Motorcycle, Stock, Reviews, Orders, Users } = sequelize.models;
 // Stock - Motorcycle
 Motorcycle.hasMany(Stock, {
   foreignKey: {
-    name: 'motorcycle_id',
     allowNull: false,
     },
     });
 
 Stock.belongsTo(Motorcycle, {
   foreignKey: {
-    name: 'motorcycle_id',
     allowNull: false,
   },
 });
@@ -72,12 +70,12 @@ Motorcycle.hasMany(Reviews);
 ////////////////////////////////////////////////////
 
 Users.hasMany(Orders, { 
-  foreignKey: 'user_id',
+  foreignKey: 'userId',
   allowNull: false,
 });
 
 Orders.belongsTo(Users, { 
-  foreignKey: 'user_id',
+  foreignKey: 'userId',
   allowNull: false,
 });
 
@@ -87,12 +85,12 @@ Orders.belongsTo(Users, {
 ////////////////////////////////////////////////////
 
 Orders.hasMany(Stock, { 
-  foreignKey: 'order_number',
+  foreignKey: 'orderNumber',
   allowNull: true,
  });
 
 Stock.belongsTo(Orders, { 
-  foreignKey: 'order_number',
+  foreignKey: 'orderNumber',
   allowNull: true,
  });
 

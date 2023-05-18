@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
-        first_name:{
+        firstName:{
             type: DataTypes.STRING(50),
             allowNull: false,
             validate: {
@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
             }   
             
         },
-        last_name:{
+        lastName:{
             type: DataTypes.STRING(50),
             allowNull: false,
             validate: {
@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             unique: true,
         },
-        phone_number:{
+        phoneNumber:{
             type: DataTypes.INTEGER,
             allowNull: false,
         },
