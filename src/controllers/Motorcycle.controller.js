@@ -31,7 +31,7 @@ const getMotorcycleByName = async (req, res) => {
             },
             include: Item
         });
-        res.json(motorcycle);
+        res.status(200).json(motorcycle);
 
     } catch (error) {
         res.json({error: 'Motorcycle not found'});
