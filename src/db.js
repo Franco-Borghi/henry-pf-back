@@ -71,13 +71,15 @@ Motorcycle.hasMany(Reviews);
 // Relationship between Orders and Clients models //
 ////////////////////////////////////////////////////
 
-// Users.hasMany(Orders, { 
-//   foreignKey: 'user_id'
-// });
+Users.hasMany(Orders, { 
+  foreignKey: 'user_id',
+  allowNull: false,
+});
 
-// Orders.belongsTo(Users, { 
-//   foreignKey: 'user_id'
-// });
+Orders.belongsTo(Users, { 
+  foreignKey: 'user_id',
+  allowNull: false,
+});
 
 
 ////////////////////////////////////////////////////
