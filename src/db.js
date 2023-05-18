@@ -69,6 +69,18 @@ Stock.belongsTo(Motorcycle, {
 
 
 
+////////////////////////////////////////////////////
+// Relationship between Orders and Stock models //
+////////////////////////////////////////////////////
+
+Orders.hasMany(Stock, { 
+  foreignKey: 'order_number'
+ });
+
+Stock.belongsTo(Orders, { 
+  foreignKey: 'order_number'
+ });
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
