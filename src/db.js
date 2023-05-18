@@ -74,11 +74,13 @@ Stock.belongsTo(Motorcycle, {
 ////////////////////////////////////////////////////
 
 Orders.hasMany(Stock, { 
-  foreignKey: 'order_number'
+  foreignKey: 'order_number',
+  allowNull: true,
  });
 
 Stock.belongsTo(Orders, { 
-  foreignKey: 'order_number'
+  foreignKey: 'order_number',
+  allowNull: true,
  });
 
 module.exports = {
