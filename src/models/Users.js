@@ -48,6 +48,6 @@ module.exports = (sequelize) => {
         role:{
             type: DataTypes.ENUM('admin', 'client'),
         }
-    })
+    },{timestamps: false})
      
 };
