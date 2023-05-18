@@ -30,7 +30,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Motorcycle, Stock, Reviews, Orders, Users } = sequelize.models;
+const { Motorcycle, Item, Reviews, Orders, Users } = sequelize.models;
 
 /* -------------------------------------------------------------- */
 /* Relations                                                      */
@@ -38,14 +38,14 @@ const { Motorcycle, Stock, Reviews, Orders, Users } = sequelize.models;
 
 //TODO: revisar si es necesario poner foreignKey en ambos o donde seria mejor ponerlo
 
-// Stock - Motorcycle
-Motorcycle.hasMany(Stock, {
+// Item - Motorcycle
+Motorcycle.hasMany(Item, {
   foreignKey: {
     allowNull: false,
   },
 });
 
-Stock.belongsTo(Motorcycle, {
+Item.belongsTo(Motorcycle, {
   foreignKey: {
     allowNull: false,
   },
@@ -83,17 +83,17 @@ Orders.belongsTo(Users, {
 
 
 ////////////////////////////////////////////////////
-// Relationship between Orders and Stock models //
+// Relationship between Orders and Item models //
 ////////////////////////////////////////////////////
 
-Orders.hasMany(Stock, {
+Orders.hasMany(Item, {
   foreignKey: {
     name: "orderNumber",
     allowNull: true
   },
 });
 
-Stock.belongsTo(Orders, {
+Item.belongsTo(Orders, {
   foreignKey: {
     name: "orderNumber",
     allowNull: true
