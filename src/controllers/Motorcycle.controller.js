@@ -1,4 +1,5 @@
 const {Item, Motorcycle} = require('../db.js');
+const { Op } = require('sequelize');
 
 
 const getAllMotorcycles = async (req, res) => {
