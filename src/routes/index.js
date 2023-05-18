@@ -1,14 +1,17 @@
 const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcycles } = require('../controllers/Motorcycle.controller');
 
 
 const router = Router();
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 
-// Ejemplo para Antonio
+router.get('/motorcycles', (req, res) => {
+    if(req.query.name) getMotorcycleByName(req,res)
+    else getAllMotorcycles(req,res)
+})
+
+router.get('/motorcycles/:id', getMotorcycleById)
+router.post('/motorcycles', createMotorcycles)
 
 
 
