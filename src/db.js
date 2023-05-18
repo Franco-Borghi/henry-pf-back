@@ -41,14 +41,12 @@ const { Motorcycle, Stock, Reviews, Orders, Users } = sequelize.models;
 // Stock - Motorcycle
 Motorcycle.hasMany(Stock, {
   foreignKey: {
-    name: 'motorcycle_id',
     allowNull: false,
-    },
-    });
+  },
+});
 
 Stock.belongsTo(Motorcycle, {
   foreignKey: {
-    name: 'motorcycle_id',
     allowNull: false,
   },
 });
@@ -71,14 +69,16 @@ Motorcycle.hasMany(Reviews);
 // Relationship between Orders and Clients models //
 ////////////////////////////////////////////////////
 
-Users.hasMany(Orders, { 
-  foreignKey: 'user_id',
-  allowNull: false,
+Users.hasMany(Orders, {
+  foreignKey: {
+    allowNull: false,
+  }
 });
 
-Orders.belongsTo(Users, { 
-  foreignKey: 'user_id',
-  allowNull: false,
+Orders.belongsTo(Users, {
+  foreignKey: {
+    allowNull: false,
+  }
 });
 
 
@@ -86,15 +86,19 @@ Orders.belongsTo(Users, {
 // Relationship between Orders and Stock models //
 ////////////////////////////////////////////////////
 
-Orders.hasMany(Stock, { 
-  foreignKey: 'order_number',
-  allowNull: true,
- });
+Orders.hasMany(Stock, {
+  foreignKey: {
+    name: "orderNumber",
+    allowNull: true
+  },
+});
 
-Stock.belongsTo(Orders, { 
-  foreignKey: 'order_number',
-  allowNull: true,
- });
+Stock.belongsTo(Orders, {
+  foreignKey: {
+    name: "orderNumber",
+    allowNull: true
+  },
+});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

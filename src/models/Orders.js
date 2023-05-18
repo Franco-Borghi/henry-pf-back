@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
  
   sequelize.define('orders', {
-    order_number: {
+    orderNumber: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -13,11 +13,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    amount_paid: {
+    amountPaid: {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    order_status: {
+    orderStatus: {
         type: DataTypes.STRING,
         allowNull: false,
     },
