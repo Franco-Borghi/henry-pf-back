@@ -24,22 +24,32 @@ const getMotorcycleByName = async (req, res) => {
     const {name} = req.query;
     
     try {
-        const searchValue = `%${name}%`
-        const motorcycle = await Motorcycle.findAll({
-            where: {
-                [Op.or]:[{
-                    model: {
-                        [Op.iLike]: searchValue
-                    }
-                }, {
-                    brand: {
-                        [Op.iLike]: searchValue
-                    }
-                }]
+
+    const searchValues = name.split(' ');
+
+    const whereClause = searchValues.map(searchValue => ({
+        [Op.or]: [
+            {
+                model: {
+                    [Op.iLike]: `%${searchValue}%`
+                }
             },
-            include: Item
-        });
-        res.status(200).json(motorcycle);
+            {
+                brand: {
+                    [Op.iLike]: `%${searchValue}%`
+                }
+            }
+        ]
+    }));
+
+    const motorcycle = await Motorcycle.findAll({
+        where: {
+            [Op.and]: whereClause
+        },
+        include: Item
+    });
+
+    res.status(200).json(motorcycle);
 
     } catch (error) {
         res.status(404).json({error: 'Motorcycle not found'});
