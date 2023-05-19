@@ -4,7 +4,6 @@ const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcy
 
 const router = Router();
 
-
 router.get('/motorcycles', (req, res) => {
     if(req.query.name) getMotorcycleByName(req,res)
     else getAllMotorcycles(req,res)
