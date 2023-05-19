@@ -24,11 +24,18 @@ const getMotorcycleByName = async (req, res) => {
     const {name} = req.query;
     
     try {
+        const searchValue = `%${name}%`
         const motorcycle = await Motorcycle.findAll({
             where: {
-                name: {
-                    [Op.iLike]: `%${name}%`
-                }
+                [Op.or]:[{
+                    model: {
+                        [Op.iLike]: searchValue
+                    }
+                }, {
+                    brand: {
+                        [Op.iLike]: searchValue
+                    }
+                }]
             },
             include: Item
         });
