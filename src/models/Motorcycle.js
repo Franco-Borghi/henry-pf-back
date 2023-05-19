@@ -26,11 +26,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    color: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    transmision: {
+    transmission: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -52,10 +48,12 @@ module.exports = (sequelize) => {
     },
     active: {
       type: DataTypes.BOOLEAN,
+      defaultValue: true,
       allowNull: false,
     },
     stock: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       allowNull: false,
     },
   }, {timestamps: false});

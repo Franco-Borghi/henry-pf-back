@@ -8,6 +8,10 @@ module.exports = (sequelize) => {
             primaryKey: true,
             allowNull: false,
         },
+        color: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         sold: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
