@@ -79,25 +79,28 @@ const createOneMotorcycle = async (obj) => {
         });
 
         await Motorcycle.update(
-            { stock: literal('stock + 1') },
+            { stock: literal('stock + 1') }, // Hay que cambiarlo para que traiga la info de items.
             { where: { id: motorcycle[0].id } }
         );
 
-        await Item.create({
+        try{
+        await motorcycle[0].createItem({
             chassisId: obj.chassisId,
             color: obj.color,
             sold: false,
-            motorcycleId: motorcycle[0].id, //revisar con metodo de sequalize
-        });
+          });
+        }catch (error) {
+            throw new Error(`The motorcycle with the chassis number ${obj.chassisId} has already been registered`)
+        }
     } catch (error) {
-        throw new Error(error);
+        throw new Error(error.message);
     }
 }
 
 const createMotorcycles = async (req, res) => {
     const motorcycles = req.body;
 
-    try {
+    try{
         if (!motorcycles) throw new Error('No hay motorcycles disponibles');
         if (!Array.isArray(motorcycles) && !(typeof motorcycles === 'object' && motorcycles !== null)) throw new Error('motorcycles debe ser de tipo array o de tipo objeto');
 
@@ -130,7 +133,9 @@ const createMotorcycles = async (req, res) => {
         }
 
         if (Array.isArray(motorcycles)) {
-            motorcycles.forEach(el => validateObject(el));
+            motorcycles.forEach( el => {
+                validateObject(el);
+            });
             for (let i = 0; i < motorcycles.length; i++) {
                 await createOneMotorcycle(motorcycles[i]);
             }
@@ -142,7 +147,6 @@ const createMotorcycles = async (req, res) => {
             await createOneMotorcycle(motorcycles);
             res.status(200).send('motocycle creada exitosamente');
         }
-          
           
     } catch (error) {
         res.status(404).send(error.message);
