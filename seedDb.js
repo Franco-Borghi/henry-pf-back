@@ -1,33 +1,5 @@
 const { createMotorcycles } = require("./src/controllers/Motorcycle.controller");
 
-module.exports = seedDb
-
-async function seedDb() {
-
-    try {
-        const req = {
-            body: motorcycles
-        };
-
-        const res = {
-            status: function () {
-                return this;
-            },
-            send: function () {
-                return this;
-            }
-        };
-
-        await createMotorcycles(req, res)
-
-        console.log('Database seeded successfully');
-    } catch (error) {
-        console.error('Error seeding database: ', error);
-    }
-}
-
-seedDb();
-
 
 
 const motorcycles = [
@@ -682,3 +654,34 @@ const motorcycles = [
         "category": "Sport"
     }
 ]
+
+async function seedDb() {
+
+    try {
+        const req = {
+            body: motorcycles
+        };
+
+        const res = {
+            status: function () {
+                return this;
+            },
+            send: function () {
+                return this;
+            }
+        };
+
+        await createMotorcycles(req, res)
+
+        console.log('Database seeded successfully');
+    } catch (error) {
+        console.error('Error seeding database: ', error);
+    }
+}
+
+seedDb();
+
+module.exports = seedDb
+
+
+
