@@ -21,19 +21,79 @@ fs.readdirSync(path.join(__dirname, '/models'))
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
-// Injectamos la conexion (sequelize) a todos los modelos
+
 modelDefiners.forEach(model => model(sequelize));
-// Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
-const { Pokemon } = sequelize.models;
+const { Motorcycle, Item, Reviews, Orders, Users } = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+/* -------------------------------------------------------------- */
+/* Relations                                                      */
+/* -------------------------------------------------------------- */
+
+// Item - Motorcycle
+Motorcycle.hasMany(Item, {
+  foreignKey: {
+    allowNull: false,
+  },
+});
+
+Item.belongsTo(Motorcycle, {
+  foreignKey: {
+    allowNull: false,
+  },
+});
+
+// Users - Reviews - Motorcycle
+
+// Comentado hasta que tengamos el modelo de Clients
+
+Users.belongsToMany(Motorcycle, { through: Reviews });
+Motorcycle.belongsToMany(Users, { through: Reviews });
+
+// Additional associations to enable different queries
+Reviews.belongsTo(Users);
+Users.hasMany(Reviews);
+Reviews.belongsTo(Motorcycle);
+Motorcycle.hasMany(Reviews);
+
+
+////////////////////////////////////////////////////
+// Relationship between Orders and Clients models //
+////////////////////////////////////////////////////
+
+Users.hasMany(Orders, {
+  foreignKey: {
+    allowNull: false,
+  }
+});
+
+Orders.belongsTo(Users, {
+  foreignKey: {
+    allowNull: false,
+  }
+});
+
+
+////////////////////////////////////////////////////
+// Relationship between Orders and Item models //
+////////////////////////////////////////////////////
+
+Orders.hasMany(Item, {
+  foreignKey: {
+    name: "orderNumber",
+    allowNull: true
+  },
+});
+
+Item.belongsTo(Orders, {
+  foreignKey: {
+    name: "orderNumber",
+    allowNull: true
+  },
+});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
