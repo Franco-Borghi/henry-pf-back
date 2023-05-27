@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcycles } = require('../controllers/Motorcycle.controller');
 const { createOrder } = require('../controllers/Orders.controller');
+const { createUser } = require('../controllers/Users.controller');
 
 const router = Router();
 
@@ -13,5 +14,7 @@ router.get('/motorcycles/:id', getMotorcycleById)
 router.post('/motorcycles', createMotorcycles)
 
 router.post('/orders', createOrder)
+
+router.post("/users", createUser)
 
 module.exports = router;
