@@ -30,6 +30,7 @@ const createOrder = async (req, res) => {
             await Item.update(
               {
                 orderNumber,
+                sold: true
               },
               {
                 where: {
@@ -46,6 +47,11 @@ const createOrder = async (req, res) => {
     }
 }
 
+//TODO: cuando el onApprove de paypal de cancelado habria que ir todo para atras. Si da approved, solo hay que updatear el status a Approved
+const updateOrder = async (req, res) => {
+}
+
 module.exports = {
-    createOrder
+    createOrder,
+    updateOrder
 }
