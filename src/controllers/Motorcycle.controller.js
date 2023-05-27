@@ -1,5 +1,6 @@
 const {Item, Motorcycle} = require('../db.js');
 const { Op, literal } = require('sequelize');
+const { updateMotorcycleStock } = require('../utils/updateStock.js');
 
 
 
@@ -63,6 +64,10 @@ const getMotorcycleByName = async (req, res) => {
 }
 
 const createOneMotorcycle = async (obj) => {
+
+    //TODO: refactor - idealmente separamos esto en 2 pasos:
+    // 1) buscar la moto solo por el motorcycleId, si lo encuentra solo agregar una moto a items
+    // 2) Si no lo encuentra, crear la moto con todo lo que tenemos aca
     try {
         const motorcycle = await Motorcycle.findOrCreate({
             where: {
@@ -80,6 +85,7 @@ const createOneMotorcycle = async (obj) => {
 
         await Motorcycle.update(
             { stock: literal('stock + 1') }, // Hay que cambiarlo para que traiga la info de items.
+            // { stock: updateMotorcycleStock(motorcycle[0].id)}, // chequear si esto funciona bien
             { where: { id: motorcycle[0].id } }
         );
 
