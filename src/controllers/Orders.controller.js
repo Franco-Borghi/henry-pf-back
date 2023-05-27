@@ -1,4 +1,5 @@
-const { Item, Orders, Users } = require('../db.js');
+const { Item, Orders, Users, Motorcycle } = require('../db.js');
+const { updateMotorcycleStock } = require('../utils/updateStock.js')
 
 const createOrder = async (req, res) => {
 
@@ -21,29 +22,31 @@ const createOrder = async (req, res) => {
         // console.log(item)
         for (const item of items) {
             const uniqueMotorcycle = await Item.findOne({
-              where: {
-                motorcycleId: item.id,
-                color: item.color
-              }
-            });
-          
-            await Item.update(
-              {
-                orderNumber,
-                sold: true
-              },
-              {
                 where: {
-                  chassisId: uniqueMotorcycle.chassisId
+                    motorcycleId: item.id,
+                    color: item.color
                 }
-              }
+            });
+
+            await Item.update(
+                {
+                    orderNumber,
+                    sold: true
+                },
+                {
+                    where: {
+                        chassisId: uniqueMotorcycle.chassisId
+                    }
+                }
             );
-          }
+        }
+
+        updateMotorcycleStock(uniqueMotorcycle.motorcycleId);
 
         res.status(200).json(order);
 
     } catch (error) {
-        res.status(404).json({ error: error.message});
+        res.status(404).json({ error: error.message });
     }
 }
 
