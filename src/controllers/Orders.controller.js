@@ -6,7 +6,22 @@ const createOrder = async (req, res) => {
     const { userId, items, amountPaid, orderNumber, orderStatus } = req.body;
 
     try {
+
+        for (const item of items) {
+
+            const uniqueMotorcycle = await Item.findOne({
+                where: {
+                    motorcycleId: item.id,
+                    color: item.color,
+                    sold: false,
+                }
+            });
+            if (!uniqueMotorcycle) throw new Error(`Motorcycle with id ${item.id} and color ${item.color} not found`)
+        }
+
+
         const currentDate = new Date();
+
         const formattedDate = currentDate.toISOString().split("T")[0];
         const order = await Orders.create({
             orderNumber,
@@ -21,27 +36,32 @@ const createOrder = async (req, res) => {
 
         // console.log(item)
         for (const item of items) {
+
             const uniqueMotorcycle = await Item.findOne({
                 where: {
                     motorcycleId: item.id,
-                    color: item.color
+                    color: item.color,
+                    sold: false,
                 }
             });
 
-            await Item.update(
-                {
-                    orderNumber,
-                    sold: true
-                },
-                {
-                    where: {
-                        chassisId: uniqueMotorcycle.chassisId
+
+                await Item.update(
+                    {
+                        orderNumber,
+                        sold: true
+                    },
+                    {
+                        where: {
+                            chassisId: uniqueMotorcycle.chassisId
+                        }
                     }
-                }
-            );
+                    );
+                    
+                    updateMotorcycleStock(uniqueMotorcycle.motorcycleId);
+    
         }
 
-        updateMotorcycleStock(uniqueMotorcycle.motorcycleId);
 
         res.status(200).json(order);
 
