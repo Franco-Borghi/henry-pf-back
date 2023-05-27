@@ -64,17 +64,18 @@ Motorcycle.hasMany(Reviews);
 // Relationship between Orders and Clients models //
 ////////////////////////////////////////////////////
 
-Users.hasMany(Orders, {
-  foreignKey: {
-    allowNull: false,
-  }
-});
+//TODO: descomentar una vez que se cree el user controller para post
+// Users.hasMany(Orders, {
+//   foreignKey: {
+//     allowNull: false,
+//   }
+// });
 
-Orders.belongsTo(Users, {
-  foreignKey: {
-    allowNull: false,
-  }
-});
+// Orders.belongsTo(Users, {
+//   foreignKey: {
+//     allowNull: false,
+//   }
+// });
 
 
 ////////////////////////////////////////////////////
