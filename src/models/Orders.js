@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
  
   sequelize.define('orders', {
     orderNumber: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false,
     },
@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
     amountPaid: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     orderStatus: {
