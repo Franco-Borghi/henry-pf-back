@@ -9,18 +9,17 @@ module.exports = (sequelize) => {
         },
         firstName:{
             type: DataTypes.STRING(50),
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: {
                     args: [0, 50],
                     msg: 'El nombre tiene demasiados carácteres'
                 }
-            }   
-            
+            }      
         },
         lastName:{
             type: DataTypes.STRING(50),
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: {
                     args: [0, 50],
@@ -34,18 +33,20 @@ module.exports = (sequelize) => {
             unique: true,
         },
         phoneNumber:{
-            type: DataTypes.INTEGER,
-            allowNull: false,
+            type: DataTypes.STRING,
+            allowNull: true,
         },
         password:{
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         active:{
             type: DataTypes.BOOLEAN,
+            defaultValue: true,
         },
         role:{
             type: DataTypes.ENUM('admin', 'client'),
+            defaultValue: 'client',
         }
     },{timestamps: false})
      
