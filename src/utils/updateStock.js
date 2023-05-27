@@ -5,6 +5,7 @@ const updateMotorcycleStock = async (motorcycleId) => {
         const count = await Item.count({
             where: {
                 motorcycleId,
+                sold: false,
             },
         });
 
