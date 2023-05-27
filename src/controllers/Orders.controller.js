@@ -9,6 +9,9 @@ const createOrder = async (req, res) => {
 
         for (const item of items) {
 
+            console.log('Item ID:', item.id);
+            console.log('Item Color:', item.color);
+
             const uniqueMotorcycle = await Item.findOne({
                 where: {
                     motorcycleId: item.id,
@@ -21,8 +24,8 @@ const createOrder = async (req, res) => {
 
 
         const currentDate = new Date();
-
         const formattedDate = currentDate.toISOString().split("T")[0];
+
         const order = await Orders.create({
             orderNumber,
             date: formattedDate,
@@ -35,6 +38,7 @@ const createOrder = async (req, res) => {
         // await order.setUser(user);
 
         // console.log(item)
+        
         for (const item of items) {
 
             const uniqueMotorcycle = await Item.findOne({
