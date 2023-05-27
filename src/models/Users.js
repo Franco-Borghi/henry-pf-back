@@ -30,15 +30,15 @@ module.exports = (sequelize) => {
         email:{
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
         },
         phoneNumber:{
             type: DataTypes.STRING,
             allowNull: true,
         },
-        password:{
-            type: DataTypes.STRING,
+        idNumber:{
+            type: DataTypes.INTEGER,
             allowNull: true,
+            unique: true
         },
         active:{
             type: DataTypes.BOOLEAN,
