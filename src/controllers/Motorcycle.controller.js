@@ -159,9 +159,31 @@ const createMotorcycles = async (req, res) => {
     }
 }
 
+//----------------------------------------------------------------
+const deleteMotorcycle= async(req,res)=>{
+    try{
+        const {id}=req.params;
+        await Item.destroy({
+            where: {
+                chassisId:id,
+              },
+        });
+        res.status(200).send("item eliminado")
+    }catch (error){
+        console.log(error);
+    }
+
+   }
+
+//-----------------------------------------------------------
+
 module.exports = {
     getMotorcycleById,
     getAllMotorcycles,
     createMotorcycles,
-    getMotorcycleByName
+    getMotorcycleByName,
+
+    deleteMotorcycle,
+    updateMotorcycle
+
 }
