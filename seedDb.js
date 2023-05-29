@@ -26,7 +26,7 @@ async function seedDb() {
     }
 }
 
-seedDb();
+// seedDb();
 
 module.exports = seedDb
 
