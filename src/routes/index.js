@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcycles, deleteMotorcycle, updateMotorcycle } = require('../controllers/Motorcycle.controller');
+const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcycles } = require('../controllers/Motorcycle.controller');
 const { createOrder } = require('../controllers/Orders.controller');
 const { createUser } = require('../controllers/Users.controller');
 const { getUser, updateUser } = require('../controllers/Users.controller');
@@ -23,11 +23,6 @@ router.put('/users/:id', updateUser)
 
 router.get('/users/:id', getUser)
 
-//----------------------------------------------------------------
-//router.put('/motorcycles/:id', updateMotorcycle)
-router.delete('/motorcycle/:id', deleteMotorcycle)
-
-//----------------------------------------------------------------
 
 
 
