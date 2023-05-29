@@ -4,12 +4,6 @@ const { updateMotorcycleStock } = require('../utils/updateStock.js')
 const createOrder = async (req, res) => {
 
     const { userId, items, amountPaid, orderNumber, orderStatus } = req.body;
-    console.log("UserId", userId)
-    console.log("Items", items)
-    console.log("AmountPaid", amountPaid)
-    console.log("OrderNumber", orderNumber)
-    console.log("OrderStatus", orderStatus)
-
 
     try {
 
