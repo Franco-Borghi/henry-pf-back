@@ -65,17 +65,17 @@ Motorcycle.hasMany(Reviews);
 ////////////////////////////////////////////////////
 
 //TODO: descomentar una vez que se cree el user controller para post
-// Users.hasMany(Orders, {
-//   foreignKey: {
-//     allowNull: false,
-//   }
-// });
+Users.hasMany(Orders, {
+  foreignKey: {
+    allowNull: true,
+  }
+});
 
-// Orders.belongsTo(Users, {
-//   foreignKey: {
-//     allowNull: false,
-//   }
-// });
+Orders.belongsTo(Users, {
+  foreignKey: {
+    allowNull: true,
+  }
+});
 
 
 ////////////////////////////////////////////////////

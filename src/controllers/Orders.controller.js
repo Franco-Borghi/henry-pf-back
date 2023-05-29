@@ -4,13 +4,16 @@ const { updateMotorcycleStock } = require('../utils/updateStock.js')
 const createOrder = async (req, res) => {
 
     const { userId, items, amountPaid, orderNumber, orderStatus } = req.body;
+    console.log("UserId", userId)
+    console.log("Items", items)
+    console.log("AmountPaid", amountPaid)
+    console.log("OrderNumber", orderNumber)
+    console.log("OrderStatus", orderStatus)
+
 
     try {
 
         for (const item of items) {
-
-            console.log('Item ID:', item.id);
-            console.log('Item Color:', item.color);
 
             const uniqueMotorcycle = await Item.findOne({
                 where: {
@@ -33,11 +36,13 @@ const createOrder = async (req, res) => {
             orderStatus,
         });
 
-        // TODO: add user when we have the controller to create users
-        // const user = await Users.findByPk(userId);
-        // await order.setUser(user);
+        
 
-        // console.log(item)
+        // TODO: add user when we have the controller to create users
+        const user = await Users.findByPk(userId)
+        await order.setUser(user);
+
+      
         
         for (const item of items) {
 
