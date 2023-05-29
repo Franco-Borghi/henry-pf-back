@@ -6,11 +6,8 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY
 } = process.env;
 
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dinamomotos`, {
-//   logging: false, // set to console.log to see the raw SQL queries
-//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-// });
-const sequelize = new Sequelize(DB_DEPLOY, {
+
+const sequelize = new Sequelize(DB_DEPLOY || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dinamomotos`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -69,17 +66,17 @@ Motorcycle.hasMany(Reviews);
 ////////////////////////////////////////////////////
 
 //TODO: descomentar una vez que se cree el user controller para post
-// Users.hasMany(Orders, {
-//   foreignKey: {
-//     allowNull: false,
-//   }
-// });
+Users.hasMany(Orders, {
+  foreignKey: {
+    allowNull: true,
+  }
+});
 
-// Orders.belongsTo(Users, {
-//   foreignKey: {
-//     allowNull: false,
-//   }
-// });
+Orders.belongsTo(Users, {
+  foreignKey: {
+    allowNull: true,
+  }
+});
 
 
 ////////////////////////////////////////////////////

@@ -9,6 +9,6 @@ conn.sync({ force: false }).then(() => {
 
     // seedDb();
 
-    console.log('%s listening at 3001'); 
+    console.log(`%s listening at ${PORT || 3001}`); 
   });
 });

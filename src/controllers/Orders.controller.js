@@ -9,9 +9,6 @@ const createOrder = async (req, res) => {
 
         for (const item of items) {
 
-            console.log('Item ID:', item.id);
-            console.log('Item Color:', item.color);
-
             const uniqueMotorcycle = await Item.findOne({
                 where: {
                     motorcycleId: item.id,
@@ -33,11 +30,13 @@ const createOrder = async (req, res) => {
             orderStatus,
         });
 
-        // TODO: add user when we have the controller to create users
-        // const user = await Users.findByPk(userId);
-        // await order.setUser(user);
+        
 
-        // console.log(item)
+        // TODO: add user when we have the controller to create users
+        const user = await Users.findByPk(userId)
+        await order.setUser(user);
+
+      
         
         for (const item of items) {
 
