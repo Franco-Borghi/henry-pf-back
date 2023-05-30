@@ -18,20 +18,19 @@ function uploadPhoto(imageUrl, publicId) {
     // console.log(data);
     // console.log(data.secure_url);
   }).catch((err) => {
-    console.log(err);
+    // console.log(err);
   });
 
 
   // Generate 
   const url = cloudinary.url(publicId, {
-    width: 150,
-    height: 150,
+    width: 400,
+    // height: 300,
     Crop: 'fill'
   });
 
   // The output url
   return url
-  // console.log(url);
   // https://res.cloudinary.com/<cloud_name>/image/upload/h_150,w_100/olympic_flag
 
 }
