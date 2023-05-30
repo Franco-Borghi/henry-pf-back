@@ -36,6 +36,4 @@ function uploadPhoto(imageUrl, publicId) {
 
 }
 
-uploadPhoto("./Ramiro.png", "Ramiro")
-
 module.exports = { uploadPhoto };
