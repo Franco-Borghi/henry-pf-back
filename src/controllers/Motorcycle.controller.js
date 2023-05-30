@@ -71,12 +71,8 @@ const createOneMotorcycle = async (obj) => {
     // 2) Si no lo encuentra, crear la moto con todo lo que tenemos aca
     try {
 
-        try {
-            
-            const imagenCloudinary = await uploadPhoto(obj.image, `PF-HENRY/${obj.brand}/${obj.model}-${obj.year}`)
-        } catch (error) {
-            console.log(error)
-        }
+        const imagenCloudinary = await uploadPhoto(obj.image, `PF-HENRY/${obj.brand}/${obj.model}-${obj.year}`)
+  
       
         const motorcycle = await Motorcycle.findOrCreate({
             where: {
