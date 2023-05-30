@@ -163,9 +163,12 @@ const createMotorcycles = async (req, res) => {
     }
 }
 
+
+
 module.exports = {
     getMotorcycleById,
     getAllMotorcycles,
     createMotorcycles,
-    getMotorcycleByName
+    getMotorcycleByName,
+
 }
