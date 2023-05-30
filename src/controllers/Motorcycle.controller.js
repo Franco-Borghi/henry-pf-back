@@ -1,7 +1,8 @@
+require('dotenv').config();
 const {Item, Motorcycle} = require('../db.js');
 const { Op, literal } = require('sequelize');
 const { updateMotorcycleStock } = require('../utils/updateStock.js');
-
+const { uploadPhoto } = require('../utils/uploadPhoto.js');
 
 
 const getAllMotorcycles = async (req, res) => {
@@ -69,6 +70,9 @@ const createOneMotorcycle = async (obj) => {
     // 1) buscar la moto solo por el motorcycleId, si lo encuentra solo agregar una moto a items
     // 2) Si no lo encuentra, crear la moto con todo lo que tenemos aca
     try {
+
+        const imagenCloudinary = await uploadPhoto(obj.image, `PF-HENRY/${obj.brand}/${obj.model}-${obj.year}`)
+      
         const motorcycle = await Motorcycle.findOrCreate({
             where: {
                 brand: obj.brand,
@@ -77,7 +81,7 @@ const createOneMotorcycle = async (obj) => {
                 cc: obj.cc,
                 transmission: obj.transmission,
                 description: obj.description,
-                image: obj.image,
+                image: imagenCloudinary,
                 price: obj.price,
                 category: obj.category,
             }
