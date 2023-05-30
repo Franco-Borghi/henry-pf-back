@@ -1,6 +1,7 @@
 const { Item, Orders, Users, Motorcycle } = require('../db.js');
 const { updateMotorcycleStock } = require('../utils/updateStock.js')
 
+
 const createOrder = async (req, res) => {
 
     const { userId, items, amountPaid, orderNumber, orderStatus } = req.body;
