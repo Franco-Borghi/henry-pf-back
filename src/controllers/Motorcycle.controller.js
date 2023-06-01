@@ -101,7 +101,9 @@ const updateMotorcycle = async (req, res) => {
                 },
             }
         );
-        res.status(200).json(motorcycle);
+
+        const updatedMotorcycle = await Motorcycle.findByPk(id);
+        res.status(200).json(updatedMotorcycle);
     } catch (error) {
         res.status(404).json({error: error.message});
     }
