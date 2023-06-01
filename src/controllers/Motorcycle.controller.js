@@ -80,8 +80,7 @@ const updateMotorcycle = async (req, res) => {
     try {
         const imagenCloudinary = await uploadPhoto(image, `PF-HENRY/${brand}/${model}-${year}`)
         
-        const motorcycle = await Motorcycle.findByPk(id);
-        const newMotorcycle = await motorcycle.update(
+        const motorcycle = await Motorcycle.update(
             {
                 brand,
                 model,
@@ -99,7 +98,7 @@ const updateMotorcycle = async (req, res) => {
                 },
             }
         );
-        res.status(200).json(newMotorcycle);
+        res.status(200).json(motorcycle);
     } catch (error) {
         res.status(404).json({error: 'Motorcycle not found'});
     }
