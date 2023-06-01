@@ -75,8 +75,10 @@ const getMotorcycleByName = async (req, res) => {
 const updateMotorcycle = async (req, res) => {
 
     const {id} = req.params;
-    const {brand, model, year, cc, transmission, description, image, price, category} = req.body;
+    const {brand, model, year, cc, transmission, description, image, price, category, active} = req.body;
 
+    console.log(req.body)
+    console.log(req.params)
     try {
         const imagenCloudinary = await uploadPhoto(image, `PF-HENRY/${brand}/${model}-${year}`)
         
@@ -91,6 +93,7 @@ const updateMotorcycle = async (req, res) => {
                 imagenCloudinary,
                 price,
                 category,
+                active
             },
             {
                 where: {
@@ -100,7 +103,7 @@ const updateMotorcycle = async (req, res) => {
         );
         res.status(200).json(motorcycle);
     } catch (error) {
-        res.status(404).json({error: 'Motorcycle not found'});
+        res.status(404).json({error: error.message});
     }
 }
 
