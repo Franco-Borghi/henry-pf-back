@@ -5,6 +5,10 @@ const { updateMotorcycleStock } = require('../utils/updateStock.js');
 const { uploadPhoto } = require('../utils/uploadPhoto.js');
 
 
+/* ----------------------------------- */
+/* GET ENDPOINTS                       */
+/* ----------------------------------- */
+
 const getAllMotorcycles = async (req, res) => {
     try {
         const motorcycles = await Motorcycle.findAll({ include: Item });
@@ -63,6 +67,52 @@ const getMotorcycleByName = async (req, res) => {
         res.status(404).json({error: 'Motorcycle not found'});
     }
 }
+
+/* ----------------------------------- */
+/* PUT ENDPOINTS                       */
+/* ----------------------------------- */
+
+const updateMotorcycle = async (req, res) => {
+
+    const {id} = req.params;
+    const {brand, model, year, cc, transmission, description, image, price, category, active} = req.body;
+
+    console.log(req.body)
+    console.log(req.params)
+    try {
+        const imagenCloudinary = await uploadPhoto(image, `PF-HENRY/${brand}/${model}-${year}`)
+        
+        const motorcycle = await Motorcycle.update(
+            {
+                brand,
+                model,
+                year,
+                cc,
+                transmission,
+                description,
+                imagenCloudinary,
+                price,
+                category,
+                active
+            },
+            {
+                where: {
+                    id,
+                },
+            }
+        );
+
+        const updatedMotorcycle = await Motorcycle.findByPk(id);
+        res.status(200).json(updatedMotorcycle);
+    } catch (error) {
+        res.status(404).json({error: error.message});
+    }
+}
+
+
+/* ----------------------------------- */
+/* POST ENDPOINTS                       */
+/* ----------------------------------- */
 
 const createOneMotorcycle = async (obj) => {
 
@@ -167,9 +217,9 @@ const createMotorcycles = async (req, res) => {
 
 
 module.exports = {
-    getMotorcycleById,
     getAllMotorcycles,
-    createMotorcycles,
+    getMotorcycleById,
     getMotorcycleByName,
-
+    updateMotorcycle,
+    createMotorcycles,
 }
