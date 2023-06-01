@@ -78,7 +78,10 @@ const updateMotorcycle = async (req, res) => {
     const {brand, model, year, cc, transmission, description, image, price, category} = req.body;
 
     try {
-        const motorcycle = await Motorcycle.update(
+        const imagenCloudinary = await uploadPhoto(image, `PF-HENRY/${brand}/${model}-${year}`)
+        
+        const motorcycle = await Motorcycle.findByPk(id);
+        const newMotorcycle = await motorcycle.update(
             {
                 brand,
                 model,
@@ -86,7 +89,7 @@ const updateMotorcycle = async (req, res) => {
                 cc,
                 transmission,
                 description,
-                image,
+                imagenCloudinary,
                 price,
                 category,
             },
@@ -96,7 +99,7 @@ const updateMotorcycle = async (req, res) => {
                 },
             }
         );
-        res.status(200).json(motorcycle);
+        res.status(200).json(newMotorcycle);
     } catch (error) {
         res.status(404).json({error: 'Motorcycle not found'});
     }
@@ -210,9 +213,9 @@ const createMotorcycles = async (req, res) => {
 
 
 module.exports = {
-    getMotorcycleById,
     getAllMotorcycles,
-    createMotorcycles,
+    getMotorcycleById,
     getMotorcycleByName,
-
+    updateMotorcycle,
+    createMotorcycles,
 }
