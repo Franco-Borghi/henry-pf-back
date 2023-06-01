@@ -1,8 +1,6 @@
 require('dotenv').config();
 const {Item, Motorcycle} = require('../db.js');
 const { Op, literal } = require('sequelize');
-const { updateMotorcycleStock } = require('../utils/updateStock.js');
-const { uploadPhoto } = require('../utils/uploadPhoto.js');
 
 
 /* ----------------------------------- */
@@ -78,7 +76,6 @@ const updateMotorcycle = async (req, res) => {
     const {brand, model, year, cc, transmission, description, image, price, category} = req.body;
 
     try {
-        const imagenCloudinary = await uploadPhoto(image, `PF-HENRY/${brand}/${model}-${year}`)
         
         const motorcycle = await Motorcycle.findByPk(id);
         const newMotorcycle = await motorcycle.update(
@@ -89,7 +86,7 @@ const updateMotorcycle = async (req, res) => {
                 cc,
                 transmission,
                 description,
-                imagenCloudinary,
+                image,
                 price,
                 category,
             },
@@ -116,9 +113,6 @@ const createOneMotorcycle = async (obj) => {
     // 1) buscar la moto solo por el motorcycleId, si lo encuentra solo agregar una moto a items
     // 2) Si no lo encuentra, crear la moto con todo lo que tenemos aca
     try {
-
-        const imagenCloudinary = await uploadPhoto(obj.image, `PF-HENRY/${obj.brand}/${obj.model}-${obj.year}`)
-  
       
         const motorcycle = await Motorcycle.findOrCreate({
             where: {
@@ -128,7 +122,7 @@ const createOneMotorcycle = async (obj) => {
                 cc: obj.cc,
                 transmission: obj.transmission,
                 description: obj.description,
-                image: imagenCloudinary,
+                image: obj.image,
                 price: obj.price,
                 category: obj.category,
             }
