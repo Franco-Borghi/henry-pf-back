@@ -5,6 +5,10 @@ const { updateMotorcycleStock } = require('../utils/updateStock.js');
 const { uploadPhoto } = require('../utils/uploadPhoto.js');
 
 
+/* ----------------------------------- */
+/* GET ENDPOINTS                       */
+/* ----------------------------------- */
+
 const getAllMotorcycles = async (req, res) => {
     try {
         const motorcycles = await Motorcycle.findAll({ include: Item });
@@ -63,6 +67,45 @@ const getMotorcycleByName = async (req, res) => {
         res.status(404).json({error: 'Motorcycle not found'});
     }
 }
+
+/* ----------------------------------- */
+/* PUT ENDPOINTS                       */
+/* ----------------------------------- */
+
+const updateMotorcycle = async (req, res) => {
+
+    const {id} = req.params;
+    const {brand, model, year, cc, transmission, description, image, price, category} = req.body;
+
+    try {
+        const motorcycle = await Motorcycle.update(
+            {
+                brand,
+                model,
+                year,
+                cc,
+                transmission,
+                description,
+                image,
+                price,
+                category,
+            },
+            {
+                where: {
+                    id,
+                },
+            }
+        );
+        res.status(200).json(motorcycle);
+    } catch (error) {
+        res.status(404).json({error: 'Motorcycle not found'});
+    }
+}
+
+
+/* ----------------------------------- */
+/* POST ENDPOINTS                       */
+/* ----------------------------------- */
 
 const createOneMotorcycle = async (obj) => {
 
