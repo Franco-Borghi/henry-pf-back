@@ -208,6 +208,20 @@ const createMotorcycles = async (req, res) => {
     }
 }
 
+const deleteMotorcycleByItem = async (req, res) => {
+    try {
+        const { itemId } = req.params; 
+        await Item.update (
+            { active: false },
+            { where: { id: itemId } }
+        );
+        res.status(200).send("Motorcycle item deleted");
+    } catch (error) {
+        res.status(404).send({ error: error.message });
+    }
+};
+
+
 
 
 module.exports = {
@@ -216,4 +230,5 @@ module.exports = {
     getMotorcycleByName,
     updateMotorcycle,
     createMotorcycles,
+    deleteMotorcycleByItem
 }
