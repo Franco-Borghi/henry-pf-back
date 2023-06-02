@@ -3,6 +3,7 @@ const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcy
 const { createOrder, getOrderByUserId } = require('../controllers/Orders.controller');
 const { createUser } = require('../controllers/Users.controller');
 const { getUser, updateUser } = require('../controllers/Users.controller');
+const { sendNotificationEmail } = require('../controllers/Email.controller');
 
 
 const router = Router();
@@ -40,7 +41,10 @@ router.put('/users/:id', updateUser)
 
 router.get('/users/:id', getUser)
 
+/* ----------------------------------- */
+/* Email                               */
+/* ----------------------------------- */
 
-
+router.post("/email", sendNotificationEmail)
 
 module.exports = router;
