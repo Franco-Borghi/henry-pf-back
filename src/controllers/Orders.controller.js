@@ -89,8 +89,25 @@ const createOrder = async (req, res) => {
 const updateOrder = async (req, res) => {
 }
 
+const getOrderByUserId = async (req, res) => {
+    const {id} = req.params
+    try {
+        const user = await Users.findByPk(id,{
+        include: {
+            model: Orders,
+                include: {
+                    model: Item,
+                    include: Motorcycle
+        }}})
+        res.status(200).json(user)
+    } catch (error) {
+        console.log("ERROR", error);
+    }
+}
+
 module.exports = {
     createOrder,
     updateOrder,
-    getAllOrders
+    getAllOrders,
+    getOrderByUserId
 }

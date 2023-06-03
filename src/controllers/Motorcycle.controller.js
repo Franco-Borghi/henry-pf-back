@@ -1,9 +1,11 @@
 require('dotenv').config();
 const {Item, Motorcycle} = require('../db.js');
 const { Op, literal } = require('sequelize');
-const { updateMotorcycleStock } = require('../utils/updateStock.js');
-const { uploadPhoto } = require('../utils/uploadPhoto.js');
 
+
+/* ----------------------------------- */
+/* GET ENDPOINTS                       */
+/* ----------------------------------- */
 
 const getAllMotorcycles = async (req, res) => {
     try {
@@ -64,15 +66,57 @@ const getMotorcycleByName = async (req, res) => {
     }
 }
 
+/* ----------------------------------- */
+/* PUT ENDPOINTS                       */
+/* ----------------------------------- */
+
+const updateMotorcycle = async (req, res) => {
+
+    const {id} = req.params;
+    const {brand, model, year, cc, transmission, description, image, price, category, active} = req.body;
+
+    console.log(req.body)
+    console.log(req.params)
+    try {
+        
+        const motorcycle = await Motorcycle.update(
+            {
+                brand,
+                model,
+                year,
+                cc,
+                transmission,
+                description,
+                image,
+                price,
+                category,
+                active
+            },
+            {
+                where: {
+                    id,
+                },
+            }
+        );
+
+        const updatedMotorcycle = await Motorcycle.findByPk(id);
+        res.status(200).json(updatedMotorcycle);
+    } catch (error) {
+        res.status(404).json({error: error.message});
+    }
+}
+
+
+/* ----------------------------------- */
+/* POST ENDPOINTS                       */
+/* ----------------------------------- */
+
 const createOneMotorcycle = async (obj) => {
 
     //TODO: refactor - idealmente separamos esto en 2 pasos:
     // 1) buscar la moto solo por el motorcycleId, si lo encuentra solo agregar una moto a items
     // 2) Si no lo encuentra, crear la moto con todo lo que tenemos aca
     try {
-
-        const imagenCloudinary = await uploadPhoto(obj.image, `PF-HENRY/${obj.brand}/${obj.model}-${obj.year}`)
-  
       
         const motorcycle = await Motorcycle.findOrCreate({
             where: {
@@ -82,7 +126,7 @@ const createOneMotorcycle = async (obj) => {
                 cc: obj.cc,
                 transmission: obj.transmission,
                 description: obj.description,
-                image: imagenCloudinary,
+                image: obj.image,
                 price: obj.price,
                 category: obj.category,
             }
@@ -167,9 +211,9 @@ const createMotorcycles = async (req, res) => {
 
 
 module.exports = {
-    getMotorcycleById,
     getAllMotorcycles,
-    createMotorcycles,
+    getMotorcycleById,
     getMotorcycleByName,
-
+    updateMotorcycle,
+    createMotorcycles,
 }
