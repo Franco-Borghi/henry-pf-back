@@ -3,7 +3,9 @@ const { updateMotorcycleStock } = require('../utils/updateStock.js')
 
 const getAllOrders = async(req, res) => {
     try {
-        const orders = await Orders.findAll({ include : Item})
+        const orders = await Orders.findAll({
+            include: [{model: Item , include: { model:Motorcycle}}]
+        })
         res.status(200).json(orders)
     } catch (error) {
     res.status(404).json({error: "Orders not Found"})
