@@ -1,4 +1,4 @@
-const { Users } = require('../db.js');
+const { Users, Orders } = require('../db.js');
 
 const createUser = async (req, res) => {
     try{
@@ -36,8 +36,20 @@ const getUser = async (req, res) => {
     try{
         const {id} = req.params;
         const user = await Users.findOne({ where: { id } })
-        res.status(200).json(user)
-    }catch(err){
+        res.status(200).json(user);
+    }
+    catch(err){
+        res.status(400).send(err)
+
+    }
+}
+
+const getUsers = async (req, res) => {
+    try{
+        const users = await Users.findAll({include: Orders})
+        res.status(200).json(users);
+    }
+    catch(err){
         res.status(400).send(err)
 
     }
@@ -47,4 +59,5 @@ module.exports = {
     createUser,
     getUser,
     updateUser,
+    getUsers
 }

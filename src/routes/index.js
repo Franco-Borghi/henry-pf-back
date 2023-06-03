@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcycles, updateMotorcycle } = require('../controllers/Motorcycle.controller');
 const { getAllOrders, createOrder, getOrderByUserId } = require('../controllers/Orders.controller');
 const { createUser } = require('../controllers/Users.controller');
-const { getUser, updateUser } = require('../controllers/Users.controller');
+const { getUser, updateUser, getUsers } = require('../controllers/Users.controller');
 const { sendNotificationEmail } = require('../controllers/Email.controller');
 
 
@@ -37,6 +37,8 @@ router.get("/orders/:id", getOrderByUserId)
 /* ----------------------------------- */
 
 router.post("/users", createUser)
+
+router.get('/users', getUsers)
 
 router.put('/users/:id', updateUser)
 
