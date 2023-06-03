@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcycles } = require('../controllers/Motorcycle.controller');
+const { getAllOrders ,createOrder } = require('../controllers/Orders.controller');
 const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, createMotorcycles, updateMotorcycle } = require('../controllers/Motorcycle.controller');
 const { createOrder, getOrderByUserId } = require('../controllers/Orders.controller');
 const { createUser } = require('../controllers/Users.controller');
@@ -24,6 +26,7 @@ router.put('/motorcycles/:id', updateMotorcycle)
 router.post('/motorcycles', createMotorcycles)
 
 
+router.get('/orders', getAllOrders)
 /* ----------------------------------- */
 /* Orders                              */
 /* ----------------------------------- */
