@@ -73,7 +73,7 @@ const getMotorcycleByName = async (req, res) => {
 const updateMotorcycle = async (req, res) => {
 
     const {id} = req.params;
-    const {brand, model, year, cc, transmission, description, image, price, category, active} = req.body;
+    const {brand, model, year, cc, transmission, description, image, price, category, active } = req.body;
 
     console.log(req.body)
     console.log(req.params)
