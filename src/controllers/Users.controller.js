@@ -16,13 +16,12 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try{
-        const {firstName, lastName, phoneNumber, idNumber, role, active, email} = req.body;
+        const {firstName, lastName, phoneNumber, idNumber, role, active } = req.body;
 
         if (typeof active === 'boolean' && role && typeof role === 'string') {
             await Users.update({ 
                 firstName: firstName || null,
                 lastName: lastName || null,
-                email: email || null,
                 phoneNumber: phoneNumber || null,
                 idNumber: idNumber || null,
                 active,
