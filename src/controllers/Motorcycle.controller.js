@@ -106,7 +106,7 @@ const updateMotorcycle = async (req, res) => {
     }
 }
 
-const updateMotorcycleByItem = async (req, res) => {
+const updateItem = async (req, res) => {
 
     const { itemId } = req.params;
     const { chassisId, color } = req.body;
@@ -126,7 +126,7 @@ const updateMotorcycleByItem = async (req, res) => {
             },
         }
       )
-  
+
       const updateItem = await
       Item.findByPk(itemId);
       res.status(200).json(updateItem);
@@ -134,6 +134,7 @@ const updateMotorcycleByItem = async (req, res) => {
         res.status(404).json({error: error.message});
     }
   };
+  
 
 
 /* ----------------------------------- */
@@ -245,5 +246,5 @@ module.exports = {
     getMotorcycleByName,
     updateMotorcycle,
     createMotorcycles,
-    updateMotorcycleByItem
+    updateItem
 }
