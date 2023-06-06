@@ -115,20 +115,20 @@ const updateItem = async (req, res) => {
     console.log(req.params)
 
     try {
-      const motorcycle = await Item.update(
+      await Item.update(
         { 
             chassisId, 
             color 
         },
         {
             where: {
-                itemId,
+                chassisId: itemId,
             },
         }
       )
 
       const updateItem = await
-      Item.findByPk(itemId);
+      Item.findByPk(chassisId);
       res.status(200).json(updateItem);
     } catch (error) {
         res.status(404).json({error: error.message});
