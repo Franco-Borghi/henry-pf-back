@@ -87,6 +87,21 @@ const createOrder = async (req, res) => {
 
 //TODO: cuando el onApprove de paypal de cancelado habria que ir todo para atras. Si da approved, solo hay que updatear el status a Approved
 const updateOrder = async (req, res) => {
+    try{
+        const {orderStatus, orderNumber } = req.body;
+
+        if (orderStatus.toLowerCase() !== 'cancelled') {
+            await Orders.update({ 
+                orderStatus,
+            },
+            { where: { orderNumber: orderNumber } })
+            
+            const order = await Orders.findByPk(orderNumber)
+            res.status(200).json(order);
+        }
+    }catch(err){
+        res.status(400).send(err.message)
+    }
 }
 
 const getOrderByUserId = async (req, res) => {
