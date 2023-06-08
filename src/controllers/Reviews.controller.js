@@ -4,26 +4,32 @@ const createReview = async (req, res) => {
 
     const { rating, comment, userId, motorcycleId } = req.body;
 
-    console.log(req.body)
-
     try {
-        const review = await Reviews.create({
-            rating,
-            comment
-        })
-
-        console.log(review)
-
         const user = await Users.findByPk(userId)
         const motorcycle = await Motorcycle.findByPk(motorcycleId)
 
-        console.log(user)
-        console.log(motorcycle)
+             // Check whether the user and motorcycle exist
+             if (!user || !motorcycle) {
+                res.status(400).json({message: 'User or Motorcycle does not exist'});
+                return;
+            }
+        console.log("User", user)
+        console.log("motorcycle", motorcycle)
 
-        await review.setUser(user)
-        await review.setMotorcycle(motorcycle)
+        const review = await Reviews.create({
+            rating,
+            comment,
+            userId: user.id,
+            motorcycleId: motorcycle.id
+        })
 
-        res.status(200).json(review)
+        console.log("Review", review)
+ 
+
+        // await review.setUser(user)
+        // await review.setMotorcycle(motorcycle)
+
+        res.status(201).json(review)
 
     } catch (err) {
         res.status(400).json(err)
