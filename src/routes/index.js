@@ -4,6 +4,7 @@ const { getAllOrders, createOrder, getOrderByUserId, updateOrder } = require('..
 const { createUser } = require('../controllers/Users.controller');
 const { getUser, updateUser, getUsers } = require('../controllers/Users.controller');
 const { sendNotificationEmail } = require('../controllers/Email.controller');
+const { updateItemSoldStatus, getItems } = require('../controllers/Items.controller');
 
 
 const router = Router();
@@ -25,6 +26,13 @@ router.post('/motorcycles', createMotorcycles)
 
 router.put("/motorcycles/item/:itemId", updateItem)
 
+/* ----------------------------------- */
+/* Items                               */
+/* ----------------------------------- */
+
+router.get('/items', getItems)
+
+router.put('/item/:id', updateItemSoldStatus)
 
 /* ----------------------------------- */
 /* Orders                              */
