@@ -34,11 +34,11 @@ const getReviews = async (req, res) => {
             include: [
                 {
                     model: Users,
-                    attributes: ['name', 'email']
+                    attributes: ['firstName', 'lastName','email']
                 },
                 {
                     model: Motorcycle,
-                    attributes: ['name', 'brand', 'model']
+                    attributes: ['brand', 'model', 'year', 'price']
                 }
             ]
         })
