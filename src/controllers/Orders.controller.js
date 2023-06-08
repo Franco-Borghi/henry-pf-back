@@ -88,12 +88,11 @@ const createOrder = async (req, res) => {
 //TODO: cuando el onApprove de paypal de cancelado habria que ir todo para atras. Si da approved, solo hay que updatear el status a Approved
 const updateOrder = async (req, res) => {
     try{
-        const {orderStatus, date, orderNumber } = req.body;
+        const {orderStatus, orderNumber } = req.body;
 
         if (orderStatus.toLowerCase() !== 'cancelled') {
             await Orders.update({ 
-                orderStatus: orderStatus,
-                date: date || '',
+                orderStatus,
             },
             { where: { orderNumber: orderNumber } })
             
@@ -101,7 +100,7 @@ const updateOrder = async (req, res) => {
             res.status(200).json(order);
         }
     }catch(err){
-        res.status(400).send(err)
+        res.status(400).send(err.message)
     }
 }
 
