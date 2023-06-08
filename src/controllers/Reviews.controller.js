@@ -28,6 +28,31 @@ const createReview = async (req, res) => {
     }
 }
 
+const getReviews = async (req, res) => {
+    try {
+        const reviews = await Reviews.findAll({
+            include: [
+                {
+                    model: Users,
+                    attributes: ['name', 'email']
+                },
+                {
+                    model: Motorcycle,
+                    attributes: ['name', 'brand', 'model']
+                }
+            ]
+        })
+        res.status(200).json(reviews)
+    } catch (err) {
+        res.status(400).json(err)
+    }
+}
+
+
+
+
+
 module.exports = {
-    createReview
+    createReview,
+    getReviews,
 }
