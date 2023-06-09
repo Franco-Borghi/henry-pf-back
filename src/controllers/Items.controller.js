@@ -35,7 +35,22 @@ const updateItemColor = async (req, res) => {
   }
 }
 
+const getAllSoldItems = async (req, res) => {
+  try {
+      const soldItems = await Item.findAll({
+          where: {
+              sold: true
+          },
+          include: Motorcycle
+      })
+      res.status(200).json(soldItems)
+  } catch (error) {
+      res.status(404).send(error);
+  }
+}
+
 module.exports = {
   updateItemColor,
-  getItems
+  getItems,
+  getAllSoldItems
 }
