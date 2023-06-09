@@ -48,8 +48,6 @@ Item.belongsTo(Motorcycle, {
 
 // Users - Reviews - Motorcycle
 
-// Comentado hasta que tengamos el modelo de Clients
-
 Users.belongsToMany(Motorcycle, { through: Reviews });
 Motorcycle.belongsToMany(Users, { through: Reviews });
 

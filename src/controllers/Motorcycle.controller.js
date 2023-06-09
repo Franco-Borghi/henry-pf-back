@@ -147,9 +147,7 @@ const updateItem = async (req, res) => {
     } catch (error) {
         res.status(404).json({error: error.message});
     }
-  };
-  
-
+}
 
 /* ----------------------------------- */
 /* POST ENDPOINTS                       */
