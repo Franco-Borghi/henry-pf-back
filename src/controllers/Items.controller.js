@@ -3,6 +3,7 @@ const { Item, Motorcycle } = require('../db.js');
 const getItems = async (req, res) => {
   try{
       const items = await Item.findAll({include: Motorcycle})
+
       res.status(200).json(items);
   }
   catch(err){
@@ -11,14 +12,14 @@ const getItems = async (req, res) => {
   }
 }
 
-const updateItemSoldStatus = async (req, res) => {
+const updateItemColor = async (req, res) => {
   const { id } = req.params;
-  const { sold } = req.body;
+  const { color } = req.body;
 
   try {
     await Item.update(
       { 
-          sold
+          color
       },
       {
           where: {
@@ -35,6 +36,6 @@ const updateItemSoldStatus = async (req, res) => {
 }
 
 module.exports = {
-  updateItemSoldStatus,
+  updateItemColor,
   getItems
 }
