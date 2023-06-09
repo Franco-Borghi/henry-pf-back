@@ -40,7 +40,10 @@ const getReviews = async (req, res) => {
                     model: Motorcycle,
                     attributes: ['brand', 'model', 'year', 'price']
                 }
-            ]
+            ],
+            where: {
+                active: true
+            }
         })
         res.status(200).json(reviews)
     } catch (err) {
@@ -53,7 +56,8 @@ const getReviewsByMotorcycle = async (req, res) => {
     try {
         const reviews = await Reviews.findAll({
             where: {
-                motorcycleId
+                motorcycleId,
+                active: true
             },
             include: [
                 {
@@ -77,7 +81,8 @@ const getReviewsByUser = async (req, res) => {
     try {
         const reviews = await Reviews.findAll({
             where: {
-                userId
+                userId,
+                active: true
             },
             include: [
                 {
