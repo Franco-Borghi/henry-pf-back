@@ -2,11 +2,28 @@ const { Item, Orders, Users, Motorcycle } = require('../db.js');
 const { updateMotorcycleStock } = require('../utils/updateStock.js')
 
 const getAllOrders = async(req, res) => {
+
+    const id  = req.query.id;
+
     try {
-        const orders = await Orders.findAll({
-            include: [{model: Item , include: { model:Motorcycle}}]
-        })
-        res.status(200).json(orders)
+
+        if (id) {
+            const order = await Orders.findOne({
+                where: {orderNumber: id},
+                include: [
+                    { model: Users },
+                    { model: Item, include: { model: Motorcycle } }
+                  ]
+            })
+
+            res.status(200).json(order)
+        } else {
+            const orders = await Orders.findAll({
+                include: [{model: Item , include: { model:Motorcycle}}]
+            })
+            res.status(200).json(orders)
+        }
+
     } catch (error) {
     res.status(404).json({error: "Orders not Found"})
     }
