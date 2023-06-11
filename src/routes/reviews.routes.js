@@ -6,7 +6,7 @@ const reviewsRouter = express.Router();
 reviewsRouter.get("/", getReviews)
 reviewsRouter.post('/', createReview)
 
-reviewsRouter.get("/:motorcycleId", getReviewsByMotorcycle)
+reviewsRouter.get("/motorcycles/:motorcycleId", getReviewsByMotorcycle)
 
 reviewsRouter.get("/:userId", getReviewsByUser)
 
