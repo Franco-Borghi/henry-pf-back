@@ -8,7 +8,7 @@ reviewsRouter.post('/', createReview)
 
 reviewsRouter.get("/motorcycles/:motorcycleId", getReviewsByMotorcycle)
 
-reviewsRouter.get("/:userId", getReviewsByUser)
+reviewsRouter.get("/users/:userId", getReviewsByUser)
 
 reviewsRouter.put("/:reviewId", updateReview)
 reviewsRouter.delete("/:reviewId", deleteReview)
