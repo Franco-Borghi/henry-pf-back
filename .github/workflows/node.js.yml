@@ -30,6 +30,12 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     continue-on-error: true
-    - name: Block PR on test failure
-      if: ${{ failure() }}
-      run: echo "Tests failed. Please fix the issues before merging."
+    - name: Check test coverage
+      run: |
+        test_result=$(npm run test --silent)
+        coverage=$(echo "$test_result" | grep "Test Coverage:" | awk '{print $3}' | sed 's/%//')
+        echo "Test Coverage: $coverage%"
+        echo "::set-output name=coverage::$coverage"
+    - name: Block PR on test failure or low coverage
+      if: ${{ failure() && steps.check_test_coverage.outputs.coverage < 98 }}
+      run: echo "Tests failed or coverage is below 98%. Please fix the issues before merging."
