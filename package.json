@@ -7,7 +7,8 @@
     "start": "nodemon index.js",
     "start:develop": "node index.js",
     "start:production": "node index.js",
-    "test": "jest --watchAll"
+    "test": "jest",
+    "testAll": "jest --watchAll --coverage",
   },
   "author": "Dinamo Motos",
   "license": "ISC",
