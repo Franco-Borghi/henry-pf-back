@@ -10,7 +10,7 @@ const { Op, literal } = require('sequelize');
 const getAllMotorcycles = async (req, res) => {
     try {
         const motorcycles = await Motorcycle.findAll({ include: Item });
-        res.status(200).json(motorcycles);
+        res.status(201).json(motorcycles);
     } catch (error) {
         res.status(404).json({error: 'Motorcycles not found'});
     }
