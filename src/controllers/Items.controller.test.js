@@ -103,7 +103,8 @@ describe('Items Controller', () => {
 
         it('should return an error if something goes wrong', async () => {
 
-            jest.spyOn(Item, 'findAll').mockRejectedValueOnce(new Error('Something went wrong'))
+            const mockError = new Error('Something went wrong')
+            jest.spyOn(Item, 'findAll').mockRejectedValueOnce(mockError)
 
             const req = mockRequest()
             const res = mockResponse()
@@ -112,7 +113,7 @@ describe('Items Controller', () => {
 
             expect(Item.findAll).toHaveBeenCalledTimes(1)
             expect(res.status).toHaveBeenCalledWith(400)
-            expect(res.json).toHaveBeenCalledWith('Something went wrong')
+            expect(res.json).toHaveBeenCalledWith(mockError)
         })
 
     })
@@ -142,7 +143,8 @@ describe('Items Controller', () => {
 
        it('should return an error if something goes wrong', async () => {
 
-            jest.spyOn(Item, 'update').mockRejectedValueOnce(new Error('Something went wrong'))
+            const mockError = new Error('Something went wrong')
+            jest.spyOn(Item, 'update').mockRejectedValueOnce(mockError)
 
             const req = mockRequest()
             const res = mockResponse()
@@ -154,7 +156,7 @@ describe('Items Controller', () => {
 
             expect(Item.update).toHaveBeenCalledTimes(1)
             expect(res.status).toHaveBeenCalledWith(404)
-            expect(res.json).toHaveBeenCalledWith('Something went wrong')
+            expect(res.json).toHaveBeenCalledWith(mockError)
         })
     })
 
@@ -175,7 +177,8 @@ describe('Items Controller', () => {
 
         it('should return an error if something goes wrong', async () => {
 
-            jest.spyOn(Item, 'findAll').mockRejectedValueOnce(new Error('Something went wrong'))
+            const mockError = new Error('Something went wrong')
+            jest.spyOn(Item, 'findAll').mockRejectedValueOnce(mockError)
 
             const req = mockRequest()
             const res = mockResponse()
@@ -184,7 +187,7 @@ describe('Items Controller', () => {
 
             expect(Item.findAll).toHaveBeenCalledTimes(1)
             expect(res.status).toHaveBeenCalledWith(404)
-            expect(res.json).toHaveBeenCalledWith('Something went wrong')
+            expect(res.json).toHaveBeenCalledWith(mockError)
         })
     })
 })
