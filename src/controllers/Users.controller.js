@@ -3,14 +3,13 @@ const { Users, Orders } = require('../db.js');
 const createUser = async (req, res) => {
     try{
         const {email, user_id} = req.body;
-        console.log(email, user_id);
         const user = await Users.create({ // No hago find or create, Auth0 se encarga de chequear que no haya un mail registrado
             id: user_id,
             email
         })
-        res.status(200).send("User registered successfully")
+        res.status(201).json("User registered successfully")
     }catch(err){
-        res.status(400).send(err)
+        res.status(400).json(err)
     }
 }
 
@@ -44,7 +43,7 @@ const updateUser = async (req, res) => {
             res.status(200).json(user);
         }
     }catch(err){
-        res.status(400).send(err)
+        res.status(400).json(err)
     }
 }
 
@@ -55,7 +54,7 @@ const getUser = async (req, res) => {
         res.status(200).json(user);
     }
     catch(err){
-        res.status(400).send(err)
+        res.status(400).json(err)
 
     }
 }
@@ -66,7 +65,7 @@ const getUsers = async (req, res) => {
         res.status(200).json(users);
     }
     catch(err){
-        res.status(400).send(err)
+        res.status(400).json(err)
 
     }
 }

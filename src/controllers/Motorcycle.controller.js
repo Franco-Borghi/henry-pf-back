@@ -75,8 +75,6 @@ const updateMotorcycle = async (req, res) => {
     const {id} = req.params;
     const {brand, model, year, cc, transmission, description, image, price, category, active } = req.body;
 
-    console.log(req.body)
-    console.log(req.params)
     try {
         
         const motorcycle = await Motorcycle.update(
@@ -106,34 +104,34 @@ const updateMotorcycle = async (req, res) => {
     }
 }
 
-const updateItem = async (req, res) => {
+// const updateItem = async (req, res) => {
 
-    const { itemId } = req.params;
-    const { chassisId, color } = req.body;
+//     const { itemId } = req.params;
+//     const { chassisId, color } = req.body;
 
-    console.log(req.body)
-    console.log(req.params)
+//     console.log(req.body)
+//     console.log(req.params)
 
-    try {
-      await Item.update(
-        { 
-            chassisId, 
-            color 
-        },
-        {
-            where: {
-                chassisId: itemId,
-            },
-        }
-      )
+//     try {
+//       await Item.update(
+//         { 
+//             chassisId, 
+//             color 
+//         },
+//         {
+//             where: {
+//                 chassisId: itemId,
+//             },
+//         }
+//       )
 
-      const updateItem = await
-      Item.findByPk(chassisId);
-      res.status(200).json(updateItem);
-    } catch (error) {
-        res.status(404).json({error: error.message});
-    }
-}
+//       const updateItem = await
+//       Item.findByPk(chassisId);
+//       res.status(200).json(updateItem);
+//     } catch (error) {
+//         res.status(404).json({error: error.message});
+//     }
+// }
 
 /* ----------------------------------- */
 /* POST ENDPOINTS                       */
@@ -172,6 +170,8 @@ const createOneMotorcycle = async (obj) => {
             color: obj.color,
             sold: false,
           });
+
+          
         }catch (error) {
             throw new Error(`The motorcycle with the chassis number ${obj.chassisId} has already been registered`)
         }
@@ -222,17 +222,17 @@ const createMotorcycles = async (req, res) => {
             for (let i = 0; i < motorcycles.length; i++) {
                 await createOneMotorcycle(motorcycles[i]);
             }
-            res.status(200).send('motocycles creadas exitosamente');
+            res.status(201).json('motocycles creadas exitosamente');
         }
 
         else if (typeof motorcycles === 'object' && motorcycles !== null) {
             validateObject(motorcycles);
             await createOneMotorcycle(motorcycles);
-            res.status(200).send('motocycle creada exitosamente');
+            res.status(201).json('motocycle creada exitosamente');
         }
           
     } catch (error) {
-        res.status(404).send(error.message);
+        res.status(404).json(error.message);
     }
 }
 
@@ -244,5 +244,6 @@ module.exports = {
     getMotorcycleByName,
     updateMotorcycle,
     createMotorcycles,
-    updateItem,
+    createOneMotorcycle
+    // updateItem,
 }
