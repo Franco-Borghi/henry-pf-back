@@ -8,7 +8,7 @@
     "start:develop": "node index.js",
     "start:production": "node index.js",
     "test": "jest",
-    "testAll": "jest --watchAll --coverage",
+    "testAll": "jest --watchAll --coverage"
   },
   "author": "Dinamo Motos",
   "license": "ISC",
