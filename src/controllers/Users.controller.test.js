@@ -54,16 +54,18 @@ describe('Users controller', () => {
 
         it('should return an error if something goes wrong', async () => {
 
-            jest.spyOn(Users, 'findAll').mockRejectedValueOnce(new Error('Something went wrong'))
+            const mockError = new Error('Something went wrong')
+            jest.spyOn(Users, 'findAll').mockRejectedValueOnce(mockError)
 
             const req = mockRequest()
             const res = mockResponse()
 
             await getUsers(req, res)
 
+
             expect(Users.findAll).toHaveBeenCalledTimes(1)
             expect(res.status).toHaveBeenCalledWith(400)
-            expect(res.json).toHaveBeenCalledWith('Something went wrong')
+            expect(res.json).toHaveBeenCalledWith(mockError)
         })
 
     })
@@ -88,7 +90,8 @@ describe('Users controller', () => {
 
         it('should return an error if something goes wrong', async () => {
 
-            jest.spyOn(Users, 'findOne').mockRejectedValueOnce(new Error('Something went wrong'))
+            const mockError = new Error('Something went wrong')
+            jest.spyOn(Users, 'findOne').mockRejectedValueOnce(mockError)
 
             const req = mockRequest()
             const res = mockResponse()
@@ -97,7 +100,7 @@ describe('Users controller', () => {
 
             expect(Users.findOne).toHaveBeenCalledTimes(1)
             expect(res.status).toHaveBeenCalledWith(400)
-            expect(res.json).toHaveBeenCalledWith('Something went wrong')
+            expect(res.json).toHaveBeenCalledWith(mockError)
         })
     })
 
@@ -127,7 +130,8 @@ describe('Users controller', () => {
 
         it('should return an error if something goes wrong', async () => {
 
-            jest.spyOn(Users, 'create').mockRejectedValueOnce(new Error('Something went wrong'))
+            const mockError = new Error('Something went wrong')
+            jest.spyOn(Users, 'create').mockRejectedValueOnce(mockError)
 
             const req = mockRequest()
             const res = mockResponse()
@@ -136,7 +140,7 @@ describe('Users controller', () => {
 
             expect(Users.create).toHaveBeenCalledTimes(1)
             expect(res.status).toHaveBeenCalledWith(400)
-            expect(res.json).toHaveBeenCalledWith('Something went wrong')
+            expect(res.json).toHaveBeenCalledWith(mockError)
         })
     })
 
@@ -181,7 +185,8 @@ describe('Users controller', () => {
 
         it('should return an error if something goes wrong', async () => {
 
-            jest.spyOn(Users, 'update').mockRejectedValueOnce(new Error('Something went wrong'))
+            const mockError = new Error('Something went wrong')
+            jest.spyOn(Users, 'update').mockRejectedValueOnce(mockError)
 
             const req = mockRequest()
             const res = mockResponse()
@@ -190,7 +195,7 @@ describe('Users controller', () => {
 
             expect(Users.update).toHaveBeenCalledTimes(1)
             expect(res.status).toHaveBeenCalledWith(400)
-            expect(res.json).toHaveBeenCalledWith('Something went wrong')
+            expect(res.json).toHaveBeenCalledWith(mockError)
         })
     })
 })
