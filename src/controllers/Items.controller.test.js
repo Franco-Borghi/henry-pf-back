@@ -1,4 +1,4 @@
-const { Item, Motorcycle } = require('../db.js');
+const { Item } = require('../db.js');
 const { getItems, updateItemColor, getAllSoldItems } = require('./Items.controller')
 
 

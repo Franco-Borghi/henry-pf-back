@@ -8,9 +8,9 @@ const createUser = async (req, res) => {
             id: user_id,
             email
         })
-        res.status(200).send("User registered successfully")
+        res.status(201).json("User registered successfully")
     }catch(err){
-        res.status(400).send(err)
+        res.status(400).json(err.message)
     }
 }
 
@@ -44,7 +44,7 @@ const updateUser = async (req, res) => {
             res.status(200).json(user);
         }
     }catch(err){
-        res.status(400).send(err)
+        res.status(400).json(err.message)
     }
 }
 
@@ -55,7 +55,7 @@ const getUser = async (req, res) => {
         res.status(200).json(user);
     }
     catch(err){
-        res.status(400).send(err)
+        res.status(400).json(err.message)
 
     }
 }
@@ -66,7 +66,7 @@ const getUsers = async (req, res) => {
         res.status(200).json(users);
     }
     catch(err){
-        res.status(400).send(err)
+        res.status(400).json(err.message)
 
     }
 }
