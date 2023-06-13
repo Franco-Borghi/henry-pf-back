@@ -47,7 +47,7 @@ const getReviews = async (req, res) => {
         })
         res.status(200).json(reviews)
     } catch (err) {
-        res.status(400).json(err)
+        res.status(404).json(err)
     }
 }
 
@@ -72,7 +72,7 @@ const getReviewsByMotorcycle = async (req, res) => {
         })
         res.status(200).json(reviews)
     } catch (err) {
-        res.status(400).json(err)
+        res.status(404).json(err)
     }
 }
 
@@ -97,7 +97,7 @@ const getReviewsByUser = async (req, res) => {
         })
         res.status(200).json(reviews)
     } catch (err) {
-        res.status(400).json(err)
+        res.status(404).json(err)
     }
 }
 
