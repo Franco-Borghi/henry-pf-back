@@ -9,8 +9,9 @@ const generateImage = async (req, res) => {
 
     const openai = new OpenAIApi(configuration);
 
-    const { motorcycle, brand, color } = req.body
+    const { motorcycle, brand, color, style, background } = req.body
 
+    console.log("prueba")
     try {
 
         const response = await openai.createChatCompletion({
@@ -18,7 +19,7 @@ const generateImage = async (req, res) => {
             messages: [
                 {
                     role: "user",
-                    content: `You are a professional dall-e prompt engineer. You are known for your detailed prompts that result in great images. Please create a prompt to give to dall-e so it can create a hyper realistic, futuristic picture of a ${color} ${brand} ${motorcycle} motorcycle in a cool situation. The motorcycle needs to be an important part of the picture but the picture needs to have more things. The prompt NEEDS to be in one paragraph. No line jumps.`
+                    content: `Please create a detailed prompt to create a ${style} of a ${color} ${brand} ${motorcycle} motorcycle with ${background} as its background. The prompt NEEDS to be in one paragraph. No line jumps. Make sure you include the ${style} in the prompt and that the motorcycle is fully visible in its entirety`
                 }
             ],
         });
