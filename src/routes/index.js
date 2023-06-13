@@ -5,6 +5,7 @@ const usersRouter = require('./users.routes')
 const reviewsRouter = require('./reviews.routes')
 const emailRouter = require('./email.routes')
 const itemsRouter = require('./items.routes')
+const openAIRouter = require('./openAI.routes')
 
 
 
@@ -16,5 +17,7 @@ router.use("/users", usersRouter)
 router.use("/reviews", reviewsRouter)
 router.use("/email", emailRouter)
 router.use("/items", itemsRouter)
+router.use("/openAI", openAIRouter)
+
 
 module.exports = router;
