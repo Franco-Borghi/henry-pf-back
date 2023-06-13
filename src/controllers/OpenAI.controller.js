@@ -19,7 +19,7 @@ const generateImage = async (req, res) => {
             messages: [
                 {
                     role: "user",
-                    content: `Please create a detailed prompt to create a ${style} of a ${color} ${brand} ${motorcycle} motorcycle with ${background} as its background. The prompt NEEDS to be in one paragraph. No line jumps. Make sure you include the ${style} in the prompt and that the motorcycle is fully visible in its entirety`
+                    content: `Please create a detailed prompt to create a ${style} of a ${color} ${brand} ${motorcycle} motorcycle with ${background} as its background. The prompt NEEDS to be in one paragraph. No line jumps. Make sure you include the ${style} in the prompt and to include in the prompt an instruction so that the motorcycle is fully visible and it doesn't occupy more then 50% of the image`
                 }
             ],
         });
