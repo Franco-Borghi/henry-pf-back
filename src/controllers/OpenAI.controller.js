@@ -9,9 +9,8 @@ const generateImage = async (req, res) => {
 
     const openai = new OpenAIApi(configuration);
 
-    const { motorcycle, brand, color, style, background } = req.body
+    const { motorcycle, brand, color, style, background, typeOfImage } = req.body
 
-    console.log("prueba")
     try {
 
         const response = await openai.createChatCompletion({
@@ -19,7 +18,7 @@ const generateImage = async (req, res) => {
             messages: [
                 {
                     role: "user",
-                    content: `Please create a detailed prompt to create a ${style} of a ${color} ${brand} ${motorcycle} motorcycle with ${background} as its background. The prompt NEEDS to be in one paragraph. No line jumps. Make sure you include the ${style} in the prompt and to include in the prompt an instruction so that the motorcycle is fully visible and it doesn't occupy more then 50% of the image`
+                    content: `Please create a detailed prompt to create a ${typeOfImage || "photograph"} on the style of ${style || "Japanese Ukiyo-e"} of a ${color || "Red"} ${brand || "BMW"} ${motorcycle || "GS1200"} motorcycle with ${background || "Space bright nebula"} as its background. The prompt need to be in one paragraph and under 400 characters. Make sure you include the ${style || "Japanese Ukiyo-e"} in the prompt and to include in the prompt.`
                 }
             ],
         });
