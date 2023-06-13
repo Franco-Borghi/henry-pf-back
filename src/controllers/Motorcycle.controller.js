@@ -104,35 +104,6 @@ const updateMotorcycle = async (req, res) => {
     }
 }
 
-// const updateItem = async (req, res) => {
-
-//     const { itemId } = req.params;
-//     const { chassisId, color } = req.body;
-
-//     console.log(req.body)
-//     console.log(req.params)
-
-//     try {
-//       await Item.update(
-//         { 
-//             chassisId, 
-//             color 
-//         },
-//         {
-//             where: {
-//                 chassisId: itemId,
-//             },
-//         }
-//       )
-
-//       const updateItem = await
-//       Item.findByPk(chassisId);
-//       res.status(200).json(updateItem);
-//     } catch (error) {
-//         res.status(404).json({error: error.message});
-//     }
-// }
-
 /* ----------------------------------- */
 /* POST ENDPOINTS                       */
 /* ----------------------------------- */
