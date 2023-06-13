@@ -15,6 +15,4 @@ motorcycleRouter.put('/:id', updateMotorcycle)
 
 motorcycleRouter.post('/', createMotorcycles)
 
-// motorcycleRouter.put("/item/:itemId", updateItem)
-
 module.exports = motorcycleRouter

@@ -117,7 +117,7 @@ const updateOrder = async (req, res) => {
             res.status(200).json(order);
         }
     }catch(err){
-        res.status(400).send(err.message)
+        res.status(400).json(err.message)
     }
 }
 
@@ -133,7 +133,7 @@ const getOrderByUserId = async (req, res) => {
         }}})
         res.status(200).json(user)
     } catch (error) {
-        console.log("ERROR", error);
+        res.status(404).json({error: "Orders not Found"})
     }
 }
 
