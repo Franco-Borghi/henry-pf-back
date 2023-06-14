@@ -20,7 +20,7 @@
     "@types/jest": "^29.5.2",
     "axios": "^1.4.0",
     "body-parser": "^1.19.0",
-    "cloudinary": "^1.37.0",
+    "cloudinary": "^1.37.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
