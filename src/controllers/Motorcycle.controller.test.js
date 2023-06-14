@@ -1,5 +1,7 @@
 const { Motorcycle } = require('../db.js')
 const { getAllMotorcycles, getMotorcycleById, getMotorcycleByName, updateMotorcycle, createMotorcycles, createOneMotorcycle } = require('./Motorcycle.controller')
+const { uploadPhoto } = require('../utils/uploadPhoto.js');
+
 
 const mockRequest = () => {
     return {
