@@ -1,4 +1,4 @@
-const { createMotorcycles } = require("./src/controllers/Motorcycle.controller");
+const { createMotorcyclesSeed } = require("./src/controllers/Motorcycle.controller");
 
 const data = require('./dataDinamo.json')
 
@@ -18,7 +18,7 @@ async function seedDb() {
             }
         };
 
-        await createMotorcycles(req, res)
+        await createMotorcyclesSeed(req, res)
 
         console.log('Database seeded successfully');
     } catch (error) {
