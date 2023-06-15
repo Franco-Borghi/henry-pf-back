@@ -3,6 +3,6 @@ const { sendNotificationEmail } = require('../controllers/Email.controller');
 
 const emailRouter = express.Router();
 
-emailRouter.post("/email", sendNotificationEmail)
+emailRouter.post("/", sendNotificationEmail)
 
 module.exports = emailRouter;

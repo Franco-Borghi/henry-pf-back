@@ -19,7 +19,7 @@ const generateImage = async (req, res) => {
                 {
                     role: "user",
                     content: `Please create a detailed prompt to create a ${typeOfImage || "photograph"} on the style of ${style || "Japanese Ukiyo-e"} of a ${color || "Red"} ${brand || "BMW"} ${motorcycle || "GS1200"} motorcycle with ${background || "Space bright nebula"} as its background. The prompt need to be in one paragraph and under 400 characters. Make sure you include the ${style || "Japanese Ukiyo-e"} in the prompt and to include in the prompt.`
-                }
+                }   
             ],
         });
 
