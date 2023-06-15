@@ -1,8 +1,13 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  
+
   sequelize.define('reviews', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
     rating: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -11,5 +16,17 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-  },{timestamps: false});
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    motorcycleId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+    active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    },
+  }, { timestamps: false });
 };
